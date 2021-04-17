@@ -3,6 +3,16 @@ class ApplicationController < ActionController::Base
   def blank_square_form
     render ({:template => "calculation_templates/square_form.html.erb"})
   end
+  def blank_payment_form
+    render ({:template => "calculation_templates/payment_form.html.erb"})
+  end
+  def calculate_payment
+     @principal=params.fetch("principal").to_f
+     @APR=params.fetch("APR").to_f
+     @years=params.fetch("Number of years").to_f
+      @payment=@principal*@APR*@years
+    render ({:template => "calculation_templates/payment_results.html.erb"})
+  end
   def random_form
     render ({:template => "calculation_templates/random_form.html.erb"})
   end
