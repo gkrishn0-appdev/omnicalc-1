@@ -10,13 +10,13 @@ class ApplicationController < ActionController::Base
      @principal=params.fetch("principal").to_f
      @APR=params.fetch("APR").to_f
      @years=params.fetch("Number of years").to_f
-      @payment=@principal*@APR*@years
-      @n=@years*12
-      @r=@APR/100/12
+
+      @n=@years*12.0
+      @r=@APR/100.0/12.0
       @PV=@principal
       @num=@r*@PV
-      @bh = (1+@r) ** (-1*@n)
-      @den=1-@bh
+      @bh = (1.0+@r) ** (-1.0*@n)
+      @den=1.0-@bh
       @monthlypayment=@num/@den
       
     render ({:template => "calculation_templates/payment_results.html.erb"})
