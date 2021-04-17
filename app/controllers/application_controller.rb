@@ -11,6 +11,14 @@ class ApplicationController < ActionController::Base
      @APR=params.fetch("APR").to_f
      @years=params.fetch("Number of years").to_f
       @payment=@principal*@APR*@years
+      @n=@years*12
+      @r=@APR/100/12
+      @PV=@principal
+      @num=@r*@PV
+      @bh = (1+@r) ** (-1*@n)
+      @den=1-@bh
+      @monthlypayment=@num/@den
+      
     render ({:template => "calculation_templates/payment_results.html.erb"})
   end
   def random_form
